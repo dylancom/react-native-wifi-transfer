@@ -64,9 +64,13 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 
 #pragma mark - <GCDWebUploaderDelegate>
 
+- (void)webUploader:(GCDWebUploader *)uploader didUploadFileAtPath:(NSString *)path {
+    NSLog(@"[UPLOAD] %@", path);
+    self.sendEvent(FILE_UPLOAD_NEW, path);
+}
+
 - (void)webUploader:(GCDWebUploader *)uploader didUploadFiles:(NSArray *)files {
     NSLog(@"[UPLOAD] %@",files);
-    self.sendEvent(FILE_UPLOAD_NEW, files);
 }
 
 - (void)webUploader:(GCDWebUploader *)uploader didMoveItemFromPath:(NSString *)fromPath toPath:(NSString *)toPath {
