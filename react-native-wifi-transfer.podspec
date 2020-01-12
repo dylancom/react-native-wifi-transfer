@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React'
-  s.dependency 'GCDWebServer/WebUploader', '~> 3.0'
+  s.dependency 'GCDWebServer/WebUploader', :git => 'https://github.com/dylancompanjen/GCDWebServer.git', :commit => '8592586c8e6b9efebd9e284b0351accaf835f425'
 end
