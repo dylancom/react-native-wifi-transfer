@@ -8,9 +8,7 @@ static NSString *ERROR_CONNECT_OPEN = @"2";
 static NSString *ERROR_PORT_ALREADY_BIND = @"4";
 static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 
-
 @implementation HttpServer
-
 
 - (void)start:(NSUInteger)port resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
     Reachability *connect = [Reachability reachabilityForInternetConnection];
@@ -19,10 +17,10 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
         return;
     }
     
-    
     // 文件存储位置
-    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+    NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"wifi"];
     NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *allowedFileExtensions = @[@"mp3"];
     NSError *error = nil;
     if (![fileManager fileExistsAtPath:documentsPath]) {
         if (![fileManager createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:&error]) {
@@ -30,11 +28,10 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
             return;
         }
     }
-    // 创建webServer,设置根目录
+
     self.webServer = [[GCDWebUploader alloc] initWithUploadDirectory:documentsPath];
-    // 设置代理
     self.webServer.delegate = self;
-    // 开启
+    self.webServer.allowedFileExtensions = allowedFileExtensions;
     
     NSError *sererror = nil;
     
@@ -46,7 +43,6 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
         reject(ERROR_CONNECT_OPEN, errMsg, sererror);
         return;
     } else {
-        
         resolve(@[[self.webServer.serverURL absoluteString]]);
         return;
     }
@@ -85,14 +81,11 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
     NSLog(@"[CREATE] %@", path);
 }
 
-
 - (void)dealloc {
     [self close];
 }
 
 @end
-
-
 
 @implementation RNWifiTransfer{
      HttpServer *server;
