@@ -21,7 +21,7 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
     
     
     // 文件存储位置
-    NSString *documentsPath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject] stringByAppendingPathComponent:@"wifi"];
+    NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error = nil;
     if (![fileManager fileExistsAtPath:documentsPath]) {
