@@ -16,9 +16,4 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React'
-  s.ios.dependency 'react-native-wifi-transfer/GCDWebServer'
-
-  s.subspec 'GCDWebServer' do |ss|
-    ss.source_files = 'GCDWebServer/WebUploader/**/*.{h,m}'
-  end
 end
