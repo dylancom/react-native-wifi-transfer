@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.source_files  = "ios/**/*.{h,m}"
 
   s.dependency 'React'
-  s.dependency 'GCDWebServer'
+  s.ios.dependency 'GCDWebServer/GCDWebServer'
 
   s.subspec 'GCDWebServer' do |ss|
     ss.source_files = 'GCDWebServer/WebUploader/**/*.{h,m}'
