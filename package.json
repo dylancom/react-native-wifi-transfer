@@ -17,7 +17,8 @@
     "mobile"
   ],
   "author": "zt5",
-  "license": "",
+  "license": "MIT",
+  "homepage": "https://github.com/dylancompanjen/react-native-wifi-transfer",
   "repository": {
     "type": "git",
     "url": "git@github.com:zt5/react-native-wifi-transfer.git"
