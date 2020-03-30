@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GCDWebUploader/GCDWebUploader.h"
+#import "GCDWebServer/GCDWebUploader.h"
 
 typedef void(^evtCallBackBlock)(NSString *event, id body);
 
