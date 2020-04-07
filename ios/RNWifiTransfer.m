@@ -8,6 +8,23 @@ static NSString *ERROR_CONNECT_OPEN = @"2";
 static NSString *ERROR_PORT_ALREADY_BIND = @"4";
 static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 
+@implementation MyWebUploader : GCDWebUploader {
+}
+
+- (BOOL)shouldMoveItemFromPath:(NSString*)fromPath toPath:(NSString*)toPath {
+    return NO;
+}
+
+- (BOOL)shouldDeleteItemAtPath:(NSString*)path {
+    return NO;
+}
+
+- (BOOL)shouldCreateDirectoryAtPath:(NSString*)path {
+    return NO;
+}
+
+@end
+
 @implementation HttpServer
 
 - (void)start:(NSUInteger)port resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
@@ -29,7 +46,7 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
         }
     }
 
-    self.webServer = [[GCDWebUploader alloc] initWithUploadDirectory:documentsPath];
+    self.webServer = [[MyWebUploader alloc] initWithUploadDirectory:documentsPath];
     self.webServer.delegate = self;
     self.webServer.allowedFileExtensions = allowedFileExtensions;
     
