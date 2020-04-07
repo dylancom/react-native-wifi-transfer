@@ -8,6 +8,17 @@
 
 typedef void(^evtCallBackBlock)(NSString *event, id body);
 
+@interface MyWebUploader : GCDWebUploader {
+}
+
+- (BOOL)shouldMoveItemFromPath:(NSString*)fromPath toPath:(NSString*)toPath;
+
+- (BOOL)shouldDeleteItemAtPath:(NSString*)path;
+
+- (BOOL)shouldCreateDirectoryAtPath:(NSString*)path;
+
+@end
+
 @interface HttpServer : NSObject <GCDWebUploaderDelegate> {
 }
 @property(nonatomic, strong) GCDWebUploader *webServer;
