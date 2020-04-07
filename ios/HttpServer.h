@@ -25,7 +25,7 @@ typedef void(^evtCallBackBlock)(NSString *event, id body);
 
 @property (nonatomic,strong) evtCallBackBlock sendEvent;
 
-- (void)start:(NSUInteger)port resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
+- (void)start:(NSUInteger)port allowedFileExtensions:(NSArray *)allowedFileExtensions resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject;
 
 - (void)close;
 
