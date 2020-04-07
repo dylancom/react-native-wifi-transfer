@@ -27,7 +27,7 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 
 @implementation HttpServer
 
-- (void)start:(NSUInteger)port resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
+- (void)start:(NSUInteger)port allowedFileExtensions:(NSArray *)allowedFileExtensions resolve:(RCTPromiseResolveBlock)resolve reject:(RCTPromiseRejectBlock)reject {
     Reachability *connect = [Reachability reachabilityForInternetConnection];
     if ([connect currentReachabilityStatus] != ReachableViaWiFi) {
         reject(ERROR_WIFI_NOT_OPEN, @"必须开启wifi", nil);
@@ -37,7 +37,6 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
     // 文件存储位置
     NSString* documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *allowedFileExtensions = @[@"mp3"];
     NSError *error = nil;
     if (![fileManager fileExistsAtPath:documentsPath]) {
         if (![fileManager createDirectoryAtPath:documentsPath withIntermediateDirectories:YES attributes:nil error:&error]) {
@@ -111,6 +110,8 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 RCT_EXPORT_METHOD(
                   start:
                   (NSUInteger) port
+                  allowedFileExtensions:
+                  (NSArray *) allowedFileExtensions
                   resolve:
                   (RCTPromiseResolveBlock) resolve
                   reject:
@@ -122,7 +123,7 @@ RCT_EXPORT_METHOD(
     server.sendEvent = ^(NSString *event, id body) {
         [tmp sendEventWithName:event body:body];
     };
-    [server start:port resolve:resolve reject:reject];
+    [server start:port allowedFileExtensions:allowedFileExtensions resolve:resolve reject:reject];
 }
 
 RCT_EXPORT_METHOD(close) {
