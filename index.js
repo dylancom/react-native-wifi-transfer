@@ -18,8 +18,8 @@ const WifiTransfer = {
         RNWifiTransfer.close();
     },
     /**开启方法*/
-    start: (port: number): Promise<string> => {
-        return RNWifiTransfer.start(port);
+    start: (port, allowedFileExtensions) => {
+        return RNWifiTransfer.start(port, allowedFileExtensions);
     },
 };
 export default WifiTransfer;
